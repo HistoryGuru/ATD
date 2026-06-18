@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://i.ibb.co" />
     <link rel="preconnect" href="https://cal.com" />
+    <link rel="preconnect" href="https://app.cal.com" />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -102,12 +103,7 @@
             <h3>Live Calendar</h3>
             <a class="text-button" href="https://cal.com/atd-soccer/private-training" target="_blank" rel="noreferrer">Open</a>
           </div>
-          <iframe
-            class="cal-frame"
-            title="ATD Soccer Cal.com booking calendar"
-            src="https://cal.com/atd-soccer/private-training?embed=true"
-            loading="lazy"
-          ></iframe>
+          <div class="cal-frame" id="cal-inline" title="ATD Soccer Cal.com booking calendar"></div>
           <p class="booking-status">Private training calendar for individual and small-group sessions.</p>
         </div>
       </section>
@@ -188,6 +184,50 @@
       </form>
     </dialog>
 
+    <script type="text/javascript">
+      (function (C, A, L) {
+        let p = function (a, ar) { a.q.push(ar); };
+        let d = C.document;
+        C.Cal = C.Cal || function () {
+          let cal = C.Cal;
+          let ar = arguments;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            d.head.appendChild(d.createElement("script")).src = A;
+            cal.loaded = true;
+          }
+          if (ar[0] === L) {
+            const api = function () { p(api, arguments); };
+            const namespace = ar[1];
+            api.q = api.q || [];
+            if (typeof namespace === "string") {
+              cal.ns[namespace] = cal.ns[namespace] || api;
+              p(cal.ns[namespace], ar);
+              p(cal, ["initNamespace", namespace]);
+            } else {
+              p(cal, ar);
+            }
+            return;
+          }
+          p(cal, ar);
+        };
+      })(window, "https://app.cal.com/embed/embed.js", "init");
+
+      Cal("init", "private-training", { origin: "https://cal.com" });
+
+      Cal.ns["private-training"]("inline", {
+        elementOrSelector: "#cal-inline",
+        config: { layout: "month_view" },
+        calLink: "atd-soccer/private-training"
+      });
+
+      Cal.ns["private-training"]("ui", {
+        styles: { branding: { brandColor: "#050505" } },
+        hideEventTypeDetails: false,
+        layout: "month_view"
+      });
+    </script>
     <script src="script.js"></script>
   </body>
 </html>
