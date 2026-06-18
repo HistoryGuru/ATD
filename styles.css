@@ -774,6 +774,14 @@ select {
   border-radius: 8px;
 }
 
+.button.is-disabled {
+  color: var(--muted);
+  background: var(--soft);
+  border-color: var(--line);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 @media (max-width: 820px) {
   .site-header {
     position: static;
