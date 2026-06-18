@@ -1,3 +1,34 @@
+function initScrollFade() {
+  const targets = document.querySelectorAll('.fade-in');
+  if (!targets.length) return;
+
+  // Respect users who prefer less motion: show everything immediately.
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion || typeof IntersectionObserver === 'undefined') {
+    targets.forEach((el) => el.classList.add('is-visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.15,
+      rootMargin: '0px 0px -60px 0px'
+    }
+  );
+
+  targets.forEach((el) => observer.observe(el));
+}
+
+initScrollFade();
+
 function initLogoFallback() {
   const logo = document.querySelector('.brand-logo');
   if (!logo) return;
