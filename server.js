@@ -19,15 +19,15 @@ const PORT = process.env.PORT || 4000;
 // booking URL (e.g. cal.com/atd-soccer/private-training -> "atd-soccer/private-training").
 // ---------------------------------------------------------------------------
 const PRICE_TO_PLAN = {
-  'prod_Uixt2AFbbaasIw': {
+  'price_1TjVxtPaFgBUJNuNqOC8CB9d': {
     plan: '1:1 Training',
     calLink: 'atd-soccer/private-training'
   },
-  'prod_UixzPkOs0Fbs0N': {
+  'price_1TjW3MPaFgBUJNuN4Z1oqU2O': {
     plan: 'One Week Intensive',
     calLink: 'atd-soccer/one-week-intensive'
   },
-  'prod_Uiy3VLY1ehOJnK': {
+  'price_1TjW7LPaFgBUJNuNC7Mt8Ovp': {
     plan: 'Group Session',
     calLink: 'atd-soccer/group-session'
   }
