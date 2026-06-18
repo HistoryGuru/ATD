@@ -21,15 +21,15 @@ const PORT = process.env.PORT || 4000;
 const PRICE_TO_PLAN = {
   'price_1TjVxtPaFgBUJNuNqOC8CB9d': {
     plan: '1:1 Training',
-    calLink: 'atd-soccer/private-training'
+    calLink: 'leroy-qu-h4xph3/1-1-core-session'
   },
   'price_1TjW3MPaFgBUJNuN4Z1oqU2O': {
     plan: 'One Week Intensive',
-    calLink: 'atd-soccer/one-week-intensive'
+    calLink: 'leroy-qu-h4xph3/one-week-core-intensive'
   },
   'price_1TjW7LPaFgBUJNuNC7Mt8Ovp': {
     plan: 'Group Session',
-    calLink: 'atd-soccer/group-session'
+    calLink: 'leroy-qu-h4xph3/group-session-60-min'
   }
 };
 
