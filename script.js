@@ -1,5 +1,5 @@
 function initScrollFade() {
-  const targets = document.querySelectorAll('.fade-in');
+  const targets = document.querySelectorAll('.fade-in, .fade-in-stagger');
   if (!targets.length) return;
 
   // Respect users who prefer less motion: show everything immediately.
