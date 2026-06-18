@@ -49,9 +49,9 @@ function initLogoFallback() {
 initLogoFallback();
 
 const paymentLinks = {
-  "1-on-1 Training": "#stripe-1-on-1-training",
-  "4-Session Pack": "#stripe-4-session-pack",
-  "Small Group": "#stripe-small-group"
+  "1:1 Training": "#stripe-1-1-training",
+  "One Week Intensive": "#stripe-one-week-intensive",
+  "Group Session": "#stripe-group-session"
 };
 
 const modal = document.querySelector("#paymentModal");
