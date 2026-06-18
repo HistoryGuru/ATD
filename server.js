@@ -11,22 +11,25 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 // ---------------------------------------------------------------------------
-// Map each Stripe Price ID to the plan it unlocks.
-// Find these in the Stripe Dashboard: Product catalog -> [product] -> the
-// price's ID starts with "price_". Replace all three placeholders below.
+// Map each Stripe Price ID to the plan it unlocks, and which Cal.com event
+// type (calLink) the customer should be able to book once they've paid.
+// Find the Price ID in Stripe Dashboard: Product catalog -> [product] -> the
+// price's ID starts with "price_". The calLink is your Cal.com username/team
+// slug + the event type's slug, exactly as it appears in that event type's
+// booking URL (e.g. cal.com/atd-soccer/private-training -> "atd-soccer/private-training").
 // ---------------------------------------------------------------------------
 const PRICE_TO_PLAN = {
   'price_REPLACE_WITH_1_1_TRAINING_PRICE_ID': {
     plan: '1:1 Training',
-    calendlyUrl: 'https://calendly.com/atd-soccer/1-1-training'
+    calLink: 'atd-soccer/private-training'
   },
   'price_REPLACE_WITH_ONE_WEEK_INTENSIVE_PRICE_ID': {
     plan: 'One Week Intensive',
-    calendlyUrl: 'https://calendly.com/atd-soccer/one-week-intensive'
+    calLink: 'atd-soccer/one-week-intensive'
   },
   'price_REPLACE_WITH_GROUP_SESSION_PRICE_ID': {
     plan: 'Group Session',
-    calendlyUrl: 'https://calendly.com/atd-soccer/group-session'
+    calLink: 'atd-soccer/group-session'
   }
 };
 
@@ -81,7 +84,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
         const store = loadStore();
         store[session.id] = {
           plan: match.plan,
-          calendlyUrl: match.calendlyUrl,
+          calLink: match.calLink,
           customerEmail: fullSession.customer_details?.email || null,
           paidAt: new Date().toISOString()
         };
@@ -118,7 +121,7 @@ app.get('/api/booking-access', (req, res) => {
     return res.status(404).json({ ok: false, error: 'No completed payment found for this session yet.' });
   }
 
-  res.json({ ok: true, plan: record.plan, calendlyUrl: record.calendlyUrl });
+  res.json({ ok: true, plan: record.plan, calLink: record.calLink });
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
